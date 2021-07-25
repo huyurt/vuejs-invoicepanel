@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace InvoicePanel.Web
 {
@@ -26,7 +27,16 @@ namespace InvoicePanel.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllers();
+
+            services.AddCors();
+            
+            services.AddControllers().AddNewtonsoftJson(opts =>
+            {
+                opts.SerializerSettings.ContractResolver = new DefaultContractResolver
+                {
+                    NamingStrategy = new CamelCaseNamingStrategy()
+                };
+            });
 
             services.AddDbContext<InvoiceDbContext>(opts =>
             {
@@ -58,6 +68,17 @@ namespace InvoicePanel.Web
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(
+                builder => builder
+                    .WithOrigins(
+                        "http://localhost:8080",
+                        "http://localhost:8081",
+                        "http://localhost:8082")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+            );
 
             app.UseAuthorization();
 
