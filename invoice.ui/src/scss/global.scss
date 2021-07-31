@@ -1,7 +1,7 @@
-$solar-blue: #2273db;
-$solar-red: #cc3020;
-$solar-green: #22a885;
-$solar-yellow: #FFBD59;
+$my-blue: #2273db;
+$my-red: #cc3020;
+$my-green: #22a885;
+$my-yellow: #FFBD59;
 
 $menu-width: 240px;
 
@@ -34,7 +34,7 @@ body {
   th {
     background-color: #fafafa;
     padding: 1.2rem;
-    border-bottom: 2px solid $solar-blue;
+    border-bottom: 2px solid $my-blue;
   }
 
 }

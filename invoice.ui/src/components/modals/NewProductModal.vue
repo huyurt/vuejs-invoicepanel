@@ -1,66 +1,64 @@
 ﻿<template>
-  <solar-modal>
-    <template v-slot:header>
-      Yeni Ürün Ekle
-    </template>
+  <my-modal>
+    <template v-slot:header> Yeni Ürün Ekle </template>
     <template v-slot:body>
       <ul class="newProduct">
         <li>
           <label for="isTaxable">Vergi istisnası var mı?</label>
           <input
-              type="checkbox"
-              id="isTaxable"
-              v-model="newProduct.isTaxable"
+            type="checkbox"
+            id="isTaxable"
+            v-model="newProduct.isTaxable"
           />
         </li>
         <li>
           <label for="productName">Ürün Adı</label>
-          <input type="text" id="productName" v-model="newProduct.name"/>
+          <input type="text" id="productName" v-model="newProduct.name" />
         </li>
 
         <li>
           <label for="productDesc">Ürün Açıklaması</label>
           <input
-              type="text"
-              id="productDesc"
-              v-model="newProduct.description"
+            type="text"
+            id="productDesc"
+            v-model="newProduct.description"
           />
         </li>
 
         <li>
           <label for="productPrice">Birim Fiyatı (₺)</label>
-          <input type="number" id="productPrice" v-model="newProduct.price"/>
+          <input type="number" id="productPrice" v-model="newProduct.price" />
         </li>
       </ul>
     </template>
     <template v-slot:footer>
-      <solar-button
-          type="button"
-          @click.native="save"
-          aria-label="save new item"
+      <my-button
+        type="button"
+        @click.native="save"
+        aria-label="save new item"
       >
         Kaydet
-      </solar-button>
-      <solar-button
-          type="button"
-          @click.native="close"
-          aria-label="close modal"
+      </my-button>
+      <my-button
+        type="button"
+        @click.native="close"
+        aria-label="close modal"
       >
         Kapat
-      </solar-button>
+      </my-button>
     </template>
-  </solar-modal>
+  </my-modal>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import SolarButton from "@/components/SolarButton.vue";
-import SolarModal from "@/components/modals/SolarModal.vue";
-import {IProduct} from "@/types/Product";
+import { Component, Vue } from "vue-property-decorator";
+import MyButton from "@/components/MyButton.vue";
+import MyModal from "@/components/modals/MyModal.vue";
+import { IProduct } from "@/types/Product";
 
 @Component({
   name: "NewProductModal",
-  components: {SolarButton, SolarModal}
+  components: { MyButton, MyModal },
 })
 export default class NewProductModal extends Vue {
   newProduct: IProduct = {
@@ -71,7 +69,7 @@ export default class NewProductModal extends Vue {
     description: "",
     price: 0,
     isTaxable: false,
-    isArchived: false
+    isArchived: false,
   };
 
   close() {

@@ -1,30 +1,25 @@
 <template>
   <div id="app">
     <div class="app-menu">
-      <side-menu/>
+      <side-menu />
     </div>
     <div class="app-content">
-      <router-view/>
+      <router-view />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import SideMenu from "@/components/SideMenu.vue";
 
 @Component({
   name: "App",
   components: {
-    SideMenu
-  }
+    SideMenu,
+  },
 })
-
-export default class App extends Vue {
-
-}
-
+export default class App extends Vue {}
 </script>
 
 <style lang="scss">

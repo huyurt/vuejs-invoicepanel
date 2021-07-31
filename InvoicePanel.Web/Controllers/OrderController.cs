@@ -29,6 +29,11 @@ namespace InvoicePanel.Web.Controllers
         [HttpPost("/api/invoice")]
         public ActionResult GenerateNewOrder([FromBody] InvoiceModel invoice)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _logger.LogInformation("Fatura oluşturuldu.");
             var order = _mapper.Map<SalesOrder>(invoice);
             order.Customer = _customerService.GetById(invoice.CustomerId);

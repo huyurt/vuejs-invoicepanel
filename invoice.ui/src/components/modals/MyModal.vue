@@ -2,29 +2,20 @@
   <transition name="modal-fade">
     <div class="modal-backdrop">
       <div
-          class="modal"
-          role="dialog"
-          aria-labelledby="modalTitle"
-          aria-describedby="modalDescription"
+        class="modal"
+        role="dialog"
+        aria-labelledby="modalTitle"
+        aria-describedby="modalDescription"
       >
-        <header
-            class="modal-header"
-            id="modalTitle"
-        >
+        <header class="modal-header" id="modalTitle">
           <slot name="header"></slot>
         </header>
 
-        <section
-            class="modal-body"
-            id="modalDescription"
-        >
+        <section class="modal-body" id="modalDescription">
           <slot name="body"></slot>
         </section>
 
-        <footer
-            class="modal-footer"
-            id="modalFooter"
-        >
+        <footer class="modal-footer" id="modalFooter">
           <slot name="footer"></slot>
         </footer>
       </div>
@@ -33,14 +24,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
-  name: "SolarModal",
+  name: "MyModal",
   components: {},
 })
-
-export default class SolarModal extends Vue {
+export default class MyModal extends Vue {
   close() {
     this.$emit("close");
   }
@@ -75,7 +65,7 @@ export default class SolarModal extends Vue {
 .modal-header {
   padding: 15px;
   display: flex;
-  background-color: $solar-blue;
+  background-color: $my-blue;
   color: #fff;
   font-size: 1.2rem;
   font-weight: bold;

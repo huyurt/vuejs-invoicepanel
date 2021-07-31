@@ -34,9 +34,14 @@ namespace InvoicePanel.Web.Controllers
             return Ok(inventoryModels);
         }
 
-        [HttpPost("/api/inventory")]
+        [HttpPatch("/api/inventory")]
         public ActionResult UpdateInventory([FromBody] ShipmentModel shipment)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _logger.LogInformation($"{shipment.ProductId} nolu ürünün stoğuna {shipment.Adjustment} ekleniyor...");
             var id = shipment.ProductId;
             var adjustment = shipment.Adjustment;

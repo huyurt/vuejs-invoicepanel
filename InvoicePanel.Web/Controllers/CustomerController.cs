@@ -4,7 +4,6 @@ using System.Linq;
 using AutoMapper;
 using InvoicePanel.Data.Models;
 using InvoicePanel.Services.Customer;
-using InvoicePanel.Services.Order;
 using InvoicePanel.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,6 +27,11 @@ namespace InvoicePanel.Web.Controllers
         [HttpPost("/api/customer")]
         public ActionResult CreateCustomer([FromBody] CustomerModel customer)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _logger.LogInformation("Yeni müşteri oluşturuluyor...");
             customer.CreatedOn = DateTime.UtcNow;
             customer.UpdatedOn = DateTime.UtcNow;

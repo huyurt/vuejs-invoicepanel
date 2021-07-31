@@ -1,55 +1,50 @@
 ﻿<template>
   <div class="side-menu-container">
     <router-link to="/">
-      <img
-          id="imgLogo"
-          alt="Logo"
-          src="../assets/images/logo.png"
-      />
+      <img id="imgLogo" alt="Logo" src="../assets/images/logo.png" />
     </router-link>
     <h1>Fatura Portalı</h1>
-    <solar-button
-        id="menuInventory"
-        :is-full-width="true"
-        @button:click="goToRoute('/inventory')"
+    <my-button
+      id="menuInventory"
+      :is-full-width="true"
+      @button:click="goToRoute('/inventory')"
     >
       Stok
-    </solar-button>
-    <solar-button
-        id="menuCustomers"
-        :is-full-width="true"
-        @button:click="goToRoute('/customers')"
+    </my-button>
+    <my-button
+      id="menuCustomers"
+      :is-full-width="true"
+      @button:click="goToRoute('/customers')"
     >
       Müşteriler
-    </solar-button>
-    <solar-button
-        id="menuInvoice"
-        :is-full-width="true"
-        @button:click="goToRoute('/invoice/new')"
+    </my-button>
+    <my-button
+      id="menuInvoice"
+      :is-full-width="true"
+      @button:click="goToRoute('/invoice/new')"
     >
       Yeni Fatura
-    </solar-button>
-    <solar-button
-        id="menuOrders"
-        :is-full-width="true"
-        @button:click="goToRoute('/orders')"
+    </my-button>
+    <my-button
+      id="menuOrders"
+      :is-full-width="true"
+      @button:click="goToRoute('/orders')"
     >
       Siparişler
-    </solar-button>
+    </my-button>
   </div>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
-import SolarButton from "@/components/SolarButton.vue";
+import { Component, Vue } from "vue-property-decorator";
+import MyButton from "@/components/MyButton.vue";
 
 @Component({
   name: "SideMenu",
   components: {
-    SolarButton,
+    MyButton,
   },
 })
-
 export default class SideMenu extends Vue {
   goToRoute(route: string) {
     this.$router.push(route);
