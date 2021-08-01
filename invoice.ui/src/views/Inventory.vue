@@ -1,7 +1,9 @@
-﻿<template>
+<template>
   <div class="inventory-container">
     <h1 id="inventoryTitle">Stok Paneli</h1>
     <hr />
+
+    <inventory-chart />
 
     <div class="inventory-actions">
       <my-button @button:click="showNewProductModal" id="addNewBtn">
@@ -65,13 +67,14 @@ import NewProductModal from "@/components/modals/NewProductModal.vue";
 import { InventoryService } from "@/services/inventory-service";
 import { IShipment } from "@/types/Shipment";
 import { ProductService } from "@/services/product-service";
+import InventoryChart from "@/components/charts/InventoryChart.vue";
 
 const inventoryService = new InventoryService();
 const productService = new ProductService();
 
 @Component({
   name: "Inventory",
-  components: { MyButton, NewProductModal, ShipmentModal },
+  components: { InventoryChart, MyButton, NewProductModal, ShipmentModal },
 })
 export default class Inventory extends Vue {
   isNewProductVisible = false;
@@ -122,6 +125,7 @@ export default class Inventory extends Vue {
 
   async initialize() {
     this.inventory = await inventoryService.getInventory();
+    await this.$store.dispatch("assignSnapshots");
   }
 
   async created() {

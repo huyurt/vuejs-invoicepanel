@@ -35,18 +35,6 @@ namespace InvoicePanel.Services.Inventory
                 .FirstOrDefault(pi => pi.Product.Id == id);
         }
 
-        public void CreateSnapshot(ProductInventory inventory)
-        {
-            var snapshot = new ProductInventorySnapshot
-            {
-                SnapshotTime = DateTime.UtcNow,
-                Product = inventory.Product,
-                QuantityOnHand = inventory.QuantityOnHand,
-            };
-
-            _context.Add(snapshot);
-        }
-
         public List<ProductInventory> GetCurrentInventory()
         {
             return _context.ProductInventories
@@ -67,7 +55,7 @@ namespace InvoicePanel.Services.Inventory
 
                 try
                 {
-                    CreateSnapshot(inventory);
+                    CreateSnapshot();
                 }
                 catch (Exception ex)
                 {
@@ -89,6 +77,27 @@ namespace InvoicePanel.Services.Inventory
                     IsSuccess = false,
                     Message = ex.StackTrace,
                 };
+            }
+        }
+
+        private void CreateSnapshot()
+        {
+            var now = DateTime.UtcNow;
+
+            var inventories = _context.ProductInventories
+                .Include(inv => inv.Product)
+                .ToList();
+
+            foreach (var inventory in inventories)
+            {
+                var snapshot = new ProductInventorySnapshot
+                {
+                    SnapshotTime = now,
+                    Product = inventory.Product,
+                    QuantityOnHand = inventory.QuantityOnHand
+                };
+
+                _context.Add(snapshot);
             }
         }
     }
