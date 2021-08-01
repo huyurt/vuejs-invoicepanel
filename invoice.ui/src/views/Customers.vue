@@ -13,7 +13,7 @@
         <th>Oluşturulma Tarihi</th>
         <th>Sil</th>
       </tr>
-      <tr v-for="customer in customers">
+      <tr v-for="customer in customers" :key="customer.id">
         <td>{{ customer.firstName + " " + customer.lastName }}</td>
         <td>
           {{
@@ -32,9 +32,9 @@
       </tr>
     </table>
     <new-customer-modal
-      v-if="isCustomerModalVisible"
+      @close="closeModal"
       @save:customer="saveNewCustomer"
-      @close="close"
+      v-if="isCustomerModalVisible"
     />
   </div>
 </template>
@@ -58,6 +58,16 @@ export default class Customers extends Vue {
 
   showNewCustomerModal() {
     this.isCustomerModalVisible = true;
+  }
+
+  closeModal() {
+    this.isCustomerModalVisible = false;
+  }
+
+  async saveNewCustomer(newCustomer: ICustomer) {
+    await customerService.addCustomer(newCustomer);
+    this.isCustomerModalVisible = false;
+    await this.initialize();
   }
 
   async deleteCustomer(customerId: number) {

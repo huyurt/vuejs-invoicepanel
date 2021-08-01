@@ -71,7 +71,13 @@ import { ICustomer } from "@/types/Customer";
   components: { MyButton, MyModal },
 })
 export default class NewProductModal extends Vue {
-  customer: ICustomer = {};
+  customer: ICustomer = {
+    primaryAddress: {},
+    createdOn: new Date(),
+    updatedOn: new Date(),
+    firstName: "",
+    lastName: "",
+  };
 
   save() {
     this.$emit("save:customer", this.customer);

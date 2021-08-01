@@ -32,18 +32,10 @@
       </ul>
     </template>
     <template v-slot:footer>
-      <my-button
-        type="button"
-        @click.native="save"
-        aria-label="save new item"
-      >
+      <my-button type="button" @click.native="save" aria-label="save new item">
         Kaydet
       </my-button>
-      <my-button
-        type="button"
-        @click.native="close"
-        aria-label="close modal"
-      >
+      <my-button type="button" @click.native="close" aria-label="close modal">
         Kapat
       </my-button>
     </template>

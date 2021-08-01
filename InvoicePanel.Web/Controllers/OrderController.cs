@@ -37,6 +37,7 @@ namespace InvoicePanel.Web.Controllers
             _logger.LogInformation("Fatura oluşturuldu.");
             var order = _mapper.Map<SalesOrder>(invoice);
             order.Customer = _customerService.GetById(invoice.CustomerId);
+            order.SalesOrderItems = _mapper.Map<List<SalesOrderItem>>(invoice.LineItems);
             _orderService.GenerateOpenOrder(order);
             return Ok();
         }
@@ -49,7 +50,7 @@ namespace InvoicePanel.Web.Controllers
             return Ok(orderModels);
         }
 
-        [HttpGet("/api/order/complete/{id}")]
+        [HttpPatch("/api/order/complete/{id}")]
         public ActionResult MakeOrderComplete(int id)
         {
             _logger.LogInformation($"{id} nolu sipariş tamamlanıyor...");

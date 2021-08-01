@@ -2,6 +2,7 @@
   <div class="btn-link">
     <button
       @click="onClick"
+      :disabled="disabled"
       :class="['my-button', { 'full-width': isFullWidth }]"
       type="button"
     >
