@@ -45,7 +45,7 @@
 
         <div class="invoice-order-list" v-if="lineItems.length">
           <div class="runningTotal">
-            <h3>Running Total:</h3>
+            <h3>Ödenecek Toplam:</h3>
             {{ runningTotal | price }}
           </div>
           <hr />
@@ -81,7 +81,6 @@
       <hr />
       <div class="invoice-step-detail" id="invoice" ref="invoice">
         <div class="invoice-logo">
-          <img id="imgLogo" alt="Logo" src="../assets/images/logo.png" />
           <h3>Fatura: {{ new Date() | humanizeDate }}</h3>
           <h3>
             Müşteri:
@@ -103,7 +102,7 @@
           </h3>
           <h3>{{ this.selectedCustomer.primaryAddress.country }}</h3>
         </div>
-        <table>
+        <table class="table">
           <thead>
             <tr>
               <th>Ürün</th>
